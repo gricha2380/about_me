@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function(){
   // if user provides a name, use it
   if (userName != null) {
     document.querySelector('.userName').innerHTML = 'Hi ' + userName + '. ';
+    console.log(userName);
   }
   // otherwise be snarky
   else {
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function(){
     // show the 'yes' 'no' buttons
     document.querySelector('.answerChoices').setAttribute('style','display:block');
     // hide the begin button
-    document.querySelector('.begin').setAttribute('style','display:none');
+    document.querySelector('.beginHolder').setAttribute('style','display:none');
 
     // listen for a click on the 'no' button
     document.querySelector('.no').addEventListener('click', function(event){
@@ -101,6 +102,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // show score and reset code
   function thanksForPlaying(){
+    document.querySelector('.beginHolder').setAttribute('style','display:none');
+    document.querySelector('.answerChoices').setAttribute('style','display:block');
     document.querySelector('.inner').innerHTML = 'Thanks for playing!';
     document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
     document.querySelector('.answerChoices').innerHTML = '<button onClick="location.reload();">Restart</button>';
@@ -145,4 +148,23 @@ document.addEventListener('DOMContentLoaded', function(){
       thanksForPlaying();
     }
   } // end incorrect
+
+  // simple version setup
+  var yn = ' Type yes or no.'; // Why type the phrase 5 times when I can do it just once?
+  document.querySelector('.simple').addEventListener('click', function () {
+    // loop to process array
+    for (var i = 0; i < questions.length; i++) {
+      var ask = prompt(questions[i].question + yn).toLowerCase();
+      console.log('Question: ' + questions[i].question);
+      if (ask == questions[i].answer[0] || ask == questions[i].answer[1]) {
+        console.log('The user is correct. ' + questions[i].correct);
+        score++;
+        alert(questions[i].correct);
+      } else {
+        console.log('The user is wrong. ' + questions[i].incorrect);
+        alert(questions[i].incorrect);
+      }
+      thanksForPlaying();
+    }
+  });
 }); // end document ready
