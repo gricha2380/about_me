@@ -85,3 +85,17 @@ button:hover {
   position: absolute;
   margin-left: calc(50% - 75px);
 }
+
+.caption {
+  text-align: center;
+  padding: 5px 20px;
+  margin: 20px auto;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  position: relative;
+  width: 500px;
+}
+
+.caption:empty {
+  display: none;
+}
