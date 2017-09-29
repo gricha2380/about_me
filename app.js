@@ -61,8 +61,7 @@ document.addEventListener('DOMContentLoaded', function(){
         if (counter < questions.length) {
           document.querySelector('.inner').innerHTML = questions[counter].question;
         } else {
-          document.querySelector('.inner').innerHTML = 'Thanks for playing!';
-          document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
+          thanksForPlaying();
         }
       } else {
         // if user's guess was wrong, increase counter and show next question
@@ -87,8 +86,7 @@ document.addEventListener('DOMContentLoaded', function(){
         if (counter < questions.length) {
           document.querySelector('.inner').innerHTML = questions[counter].question;
         } else {
-          document.querySelector('.inner').innerHTML = 'Thanks for playing!';
-          document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
+          thanksForPlaying();
         }
       } else {
         updateStatus();
@@ -135,5 +133,12 @@ document.addEventListener('DOMContentLoaded', function(){
       }
       document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
     }
+  }
+
+  // reset code
+  function thanksForPlaying(){
+    document.querySelector('.inner').innerHTML = 'Thanks for playing!';
+    document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
+    document.querySelector('.answerChoices').innerHTML = '<button onClick="location.reload();">Restart</button>';
   }
 });
