@@ -63,3 +63,24 @@ button:hover {
 .inner {
   text-align: center;
 }
+
+
+/* The animation code */
+@keyframes fadeUp {
+    from {margin-top: 0;opacity: 1}
+    to {margin-top: -10px;opacity: 0;display: none;}
+}
+
+.feedback.live {
+    animation-name: fadeUp;
+    animation-duration: 1s;
+    display: block;
+}
+.feedback {
+  color: green;
+  font-weight: bold;
+  display: none;
+  text-align: center;
+  position: absolute;
+  margin-left: calc(50% - 75px);
+}

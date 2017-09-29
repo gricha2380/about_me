@@ -59,24 +59,27 @@ document.addEventListener('DOMContentLoaded', function(){
 
   function askQuestionsFancy() {
     document.querySelector('.inner').innerHTML = questions[counter].question;
-    //for (var i = 0; i < questions.length; i++) {
-    //document.querySelector('.inner').innerHTML = questions[i].question;
     document.querySelector('.answerChoices').setAttribute('style','display:block');
     document.querySelector('.begin').setAttribute('style','display:none');
+
+    // listen for a click on the 'no' button
     document.querySelector('.no').addEventListener('click', function(event){
+      // only run if there are questions left to show
       if (counter < questions.length) {
+        // if the saved answer is no...
         if (questions[counter].answer[0] == 'no') {
           score++;
           counter++;
-          console.log('user score is ' + score);
-          console.log('counter is ' + counter);
-          console.log('question length is ' + questions.length);
+
+          // animate 'correct' badge
+          //document.querySelector('.feedback').innerHTML = 'Correct!';
+          //document.querySelector('.feedback').classList.toggle('live');
+
+          // set the value of main div to the next question
           document.querySelector('.inner').innerHTML = questions[counter].question;
         } else {
+          // if user's guess was wrong, increase counter and show next question
           counter++;
-          console.log('user score is ' + score);
-          console.log('counter is ' + counter);
-          console.log('question length is ' + questions.length);
           document.querySelector('.inner').innerHTML = questions[counter].question;
         }
       } else {
@@ -84,37 +87,35 @@ document.addEventListener('DOMContentLoaded', function(){
         document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
       }
     });
-    document.querySelector('.yes').addEventListener('click', function(event){
-      //if (counter < questions.length) {
-        if (questions[counter].answer[0] == 'yes') {
-          score++;
-          counter++;
-          console.log('user score is ' + score);
-          console.log('counter is ' + counter);
-          console.log('question length is ' + questions.length);
-          if (counter < questions.length) {
-            document.querySelector('.inner').innerHTML = questions[counter].question;
-          } else {
-            document.querySelector('.inner').innerHTML = 'Thanks for playing!';
-            document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
-          }
-        } else {
-          counter++;
-          console.log('user score is ' + score);
-          console.log('counter is ' + counter);
-          console.log('question length is ' + questions.length);
-          if (counter < questions.length) {
-            document.querySelector('.inner').innerHTML = questions[counter].question;
-          } else {
-            document.querySelector('.inner').innerHTML = 'Thanks for playing!';
-            document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
-          }
-        }
-      //} else {
-        // document.querySelector('.inner').innerHTML = 'Thanks for playing!';
-        // document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
-      //}
 
+    // listen for a click on the 'yes' button
+    document.querySelector('.yes').addEventListener('click', function(event){
+      // if the saved answer is no...
+      if (questions[counter].answer[0] == 'yes') {
+        score++;
+        counter++;
+
+        //document.querySelector('.feedback').innerHTML = 'Correct!';
+        //document.querySelector('.feedback').classList.toggle('live');
+
+        if (counter < questions.length) {
+          document.querySelector('.inner').innerHTML = questions[counter].question;
+        } else {
+          document.querySelector('.inner').innerHTML = 'Thanks for playing!';
+          document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
+        }
+      } else {
+        counter++;
+        console.log('user score is ' + score);
+        console.log('counter is ' + counter);
+        console.log('question length is ' + questions.length);
+        if (counter < questions.length) {
+          document.querySelector('.inner').innerHTML = questions[counter].question;
+        } else {
+          document.querySelector('.inner').innerHTML = 'Thanks for playing!';
+          document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
+        }
+      }
     });
     //}
   }
