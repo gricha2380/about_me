@@ -22,8 +22,9 @@ body {
   margin: 0 auto -40px auto;
   position: absolute;
   bottom: 0;
-  left: calc(50% - 200px);
+  left: calc(50% - 150px);
   z-index: -1;
+  width: 300px;
 }
 
 .intro {
