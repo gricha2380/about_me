@@ -1,7 +1,18 @@
 'use strict';
 document.addEventListener('DOMContentLoaded', function(){
+  // ask for user name
+  var userName = prompt('Hi, what\'s your name?');
+  // if user provides a name, use it
+  if (userName != null) {
+    document.querySelector('.userName').innerHTML = 'Hi ' + userName + '. ';
+  }
+  // otherwise be snarky
+  else {
+    document.querySelector('.userName').innerHTML = 'Hi annonmyous Stranger! ';
+  }
+  // saving object of correct answers. Used in button event listners to compare user input
   var choices = {'yes':['yes','y'],'no':['no','n']};
-  var yn = ' Type yes or no.'; // Why type the phrase 5 times when I can do it just once?
+  // initiate score to track points and counter to incriment progress
   var score = 0;
   var counter = 0;
 
@@ -33,16 +44,20 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   ];
 
-  //askQuestions();
+  // if user clicks 'begin', launch question function
   document.querySelector('.begin').addEventListener('click', function(event){
+    // only bother if there are questions left to ask
     if (counter <= questions.length) {
       askQuestionsFancy();
     }
   });
 
   function askQuestionsFancy() {
+    // set value of main div to the content of the current question
     document.querySelector('.inner').innerHTML = questions[counter].question;
+    // show the 'yes' 'no' buttons
     document.querySelector('.answerChoices').setAttribute('style','display:block');
+    // hide the begin button
     document.querySelector('.begin').setAttribute('style','display:none');
 
     // listen for a click on the 'no' button
@@ -82,19 +97,25 @@ document.addEventListener('DOMContentLoaded', function(){
     counter++;
   }
 
-  // reset code
+  // show score and reset code
   function thanksForPlaying(){
     document.querySelector('.inner').innerHTML = 'Thanks for playing!';
     document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
     document.querySelector('.answerChoices').innerHTML = '<button onClick="location.reload();">Restart</button>';
   }
 
+  // incriment score if correct then show next question. Otherwise show score
   function ifCorrect() {
+    // increase score
     score++;
-    document.querySelector('.caption').innerHTML = questions[counter].correct; // description
+
+    // show feedback for current question
+    document.querySelector('.caption').innerHTML = questions[counter].correct;
+
+    // go to next question
     updateStatus();
 
-    // animate 'correct' badge then hide after delay
+    // animate 'correct' badge with CSS then hide after delay
     document.querySelector('.feedback').innerHTML = 'Correct!';
     document.querySelector('.feedback').classList.toggle('live');
     hideFeedback();
@@ -107,10 +128,15 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   } // end correct
 
+  // if there are questions left, show next one. Otherwise show score
   function ifIncorrect() {
-    // if user's guess was wrong, increase counter and show next question
-    document.querySelector('.caption').innerHTML = questions[counter].incorrect; //description
+    // show feedback for current question
+    document.querySelector('.caption').innerHTML = questions[counter].incorrect;
+
+    // go to next question
     updateStatus();
+
+    // only run if there are questions left to show
     if (counter < questions.length) {
       document.querySelector('.inner').innerHTML = questions[counter].question;
     } else {
