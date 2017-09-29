@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function(){
       incorrect: 'I\'m not from Seattle. I was actually born on the island of Grenada'},
     {question:'Does Gregor do web development for fun?',
       answer: choices['yes'],
-      correct: 'Yes, it is what I do for fun.',
-      incorrect: 'Whoever told you that was lying. Web development is what I do for fun!'
+      correct: 'Yes, web dev is what I do for fun!',
+      incorrect: 'Whoever told you that was lying! Web dev is totally what I do for fun!'
     },
     {question:'Was Hypertalk the first programming language Gregor learned?',
       answer: choices['yes'],
@@ -50,7 +50,8 @@ document.addEventListener('DOMContentLoaded', function(){
       // if the saved answer is no...
       if (questions[counter].answer[0] == 'no') {
         score++;
-        updateStatus(score);
+        document.querySelector('.caption').innerHTML = questions[counter].correct; // description
+        updateStatus();
 
         // animate 'correct' badge then hide after delay
         document.querySelector('.feedback').innerHTML = 'Correct!';
@@ -65,16 +66,22 @@ document.addEventListener('DOMContentLoaded', function(){
         }
       } else {
         // if user's guess was wrong, increase counter and show next question
+        document.querySelector('.caption').innerHTML = questions[counter].incorrect; //description
         updateStatus();
-        document.querySelector('.inner').innerHTML = questions[counter].question;
+        if (counter < questions.length) {
+          document.querySelector('.inner').innerHTML = questions[counter].question;
+        } else {
+          thanksForPlaying();
+        }
       }
-    });
+    }); // end no event listener
 
     // listen for a click on the 'yes' button
     document.querySelector('.yes').addEventListener('click', function(event){
       // if the saved answer is no...
       if (questions[counter].answer[0] == 'yes') {
         score++;
+        document.querySelector('.caption').innerHTML = questions[counter].correct; // description
         updateStatus();
 
         // animate 'correct' badge then hide after delay
@@ -89,12 +96,13 @@ document.addEventListener('DOMContentLoaded', function(){
           thanksForPlaying();
         }
       } else {
+        // if user's guess was wrong, increase counter and show next question
+        document.querySelector('.caption').innerHTML = questions[counter].incorrect; //description
         updateStatus();
         if (counter < questions.length) {
           document.querySelector('.inner').innerHTML = questions[counter].question;
         } else {
-          document.querySelector('.inner').innerHTML = 'Thanks for playing!';
-          document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
+          thanksForPlaying();
         }
       }
     }); // end yes event listener
