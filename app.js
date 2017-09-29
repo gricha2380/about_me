@@ -1,4 +1,6 @@
-'use strict';
+'use strict'; // no sloppy JS habits allowed here.
+
+// event listener to stop script from loading until page is fully rendered
 document.addEventListener('DOMContentLoaded', function(){
   // ask for user name
   var userName = prompt('Hi, what\'s your name?');
