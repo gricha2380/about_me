@@ -100,3 +100,16 @@ button:hover {
 .caption:empty {
   display: none;
 }
+
+.simple {
+  font-family: initial;
+  font-size: 12px;
+  display: block;
+  padding-top: 10px;
+  text-decoration: underline;
+}
+
+.simple:hover {
+  color: white;
+  cursor: pointer;
+}
