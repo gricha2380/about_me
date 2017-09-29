@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function(){
     {question:'Does Gregor do web development for fun?',
       answer: choices['yes'],
       correct: 'Yes, web dev is what I do for fun!',
-      incorrect: 'Whoever told you that was lying! Web dev is totally what I do for fun!'
+      incorrect: 'Whoever told you that was totally wrong! Web dev really is what I do for fun!'
     },
     {question:'Was Hypertalk the first programming language Gregor learned?',
       answer: choices['yes'],
@@ -49,63 +49,21 @@ document.addEventListener('DOMContentLoaded', function(){
     document.querySelector('.no').addEventListener('click', function(event){
       // if the saved answer is no...
       if (questions[counter].answer[0] == 'no') {
-        score++;
-        document.querySelector('.caption').innerHTML = questions[counter].correct; // description
-        updateStatus();
-
-        // animate 'correct' badge then hide after delay
-        document.querySelector('.feedback').innerHTML = 'Correct!';
-        document.querySelector('.feedback').classList.toggle('live');
-        hideFeedback();
-
-        // only run if there are questions left to show
-        if (counter < questions.length) {
-          document.querySelector('.inner').innerHTML = questions[counter].question;
-        } else {
-          thanksForPlaying();
-        }
+        ifCorrect();
       } else {
-        // if user's guess was wrong, increase counter and show next question
-        document.querySelector('.caption').innerHTML = questions[counter].incorrect; //description
-        updateStatus();
-        if (counter < questions.length) {
-          document.querySelector('.inner').innerHTML = questions[counter].question;
-        } else {
-          thanksForPlaying();
-        }
+        ifIncorrect();
       }
-    }); // end no event listener
+    }); // end 'no' event listener
 
     // listen for a click on the 'yes' button
     document.querySelector('.yes').addEventListener('click', function(event){
       // if the saved answer is no...
       if (questions[counter].answer[0] == 'yes') {
-        score++;
-        document.querySelector('.caption').innerHTML = questions[counter].correct; // description
-        updateStatus();
-
-        // animate 'correct' badge then hide after delay
-        document.querySelector('.feedback').innerHTML = 'Correct!';
-        document.querySelector('.feedback').classList.toggle('live');
-        hideFeedback();
-
-        // only run if there are questions left to show
-        if (counter < questions.length) {
-          document.querySelector('.inner').innerHTML = questions[counter].question;
-        } else {
-          thanksForPlaying();
-        }
+        ifCorrect();
       } else {
-        // if user's guess was wrong, increase counter and show next question
-        document.querySelector('.caption').innerHTML = questions[counter].incorrect; //description
-        updateStatus();
-        if (counter < questions.length) {
-          document.querySelector('.inner').innerHTML = questions[counter].question;
-        } else {
-          thanksForPlaying();
-        }
+        ifIncorrect();
       }
-    }); // end yes event listener
+    }); // end 'yes' event listener
   } // end ask questions fancy
 
   // delay function to hide feedback div
@@ -124,29 +82,39 @@ document.addEventListener('DOMContentLoaded', function(){
     counter++;
   }
 
-  // basic ask question function. No longer in use.
-  function askQuestions() {
-    //score = 0;
-    // loop to process array
-    for (var i = 0; i < questions.length; i++) {
-      var ask = prompt(questions[i].question + yn).toLowerCase();
-      console.log('Question: ' + questions[i].question);
-      if (ask == questions[i].answer[0] || ask == questions[i].answer[1]) {
-        console.log('The user is correct. ' + questions[i].correct);
-        score++;
-        alert(questions[i].correct);
-      } else {
-        console.log('The user is wrong. ' + questions[i].incorrect);
-        alert(questions[i].incorrect);
-      }
-      document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
-    }
-  }
-
   // reset code
   function thanksForPlaying(){
     document.querySelector('.inner').innerHTML = 'Thanks for playing!';
     document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
     document.querySelector('.answerChoices').innerHTML = '<button onClick="location.reload();">Restart</button>';
   }
-});
+
+  function ifCorrect() {
+    score++;
+    document.querySelector('.caption').innerHTML = questions[counter].correct; // description
+    updateStatus();
+
+    // animate 'correct' badge then hide after delay
+    document.querySelector('.feedback').innerHTML = 'Correct!';
+    document.querySelector('.feedback').classList.toggle('live');
+    hideFeedback();
+
+    // only run if there are questions left to show
+    if (counter < questions.length) {
+      document.querySelector('.inner').innerHTML = questions[counter].question;
+    } else {
+      thanksForPlaying();
+    }
+  } // end correct
+
+  function ifIncorrect() {
+    // if user's guess was wrong, increase counter and show next question
+    document.querySelector('.caption').innerHTML = questions[counter].incorrect; //description
+    updateStatus();
+    if (counter < questions.length) {
+      document.querySelector('.inner').innerHTML = questions[counter].question;
+    } else {
+      thanksForPlaying();
+    }
+  } // end incorrect
+}); // end document ready
