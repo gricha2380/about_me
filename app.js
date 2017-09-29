@@ -1,8 +1,9 @@
 'use strict';
 document.addEventListener('DOMContentLoaded', function(){
-  var score = 0;
   var choices = {'yes':['yes','y'],'no':['no','n']};
   var yn = ' Type yes or no.'; // Why type the phrase 5 times when I can do it just once?
+  var score = 0;
+  var counter = 0;
 
   // array of objects to hold questions
   var questions = [
@@ -32,18 +33,89 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   ];
 
-  // loop to process array
-  for (var i = 0; i < questions.length; i++) {
-    var ask = prompt(questions[i].question + yn).toLowerCase();
-    console.log('Question: ' + questions[i].question);
-    if (ask == questions[i].answer[0] || ask == questions[i].answer[1]) {
-      console.log('The user is correct. ' + questions[i].correct);
-      score++;
-      alert(questions[i].correct);
-    } else {
-      console.log('The user is wrong. ' + questions[i].incorrect);
-      alert(questions[i].incorrect);
+  function askQuestions() {
+    //score = 0;
+    // loop to process array
+    for (var i = 0; i < questions.length; i++) {
+      var ask = prompt(questions[i].question + yn).toLowerCase();
+      console.log('Question: ' + questions[i].question);
+      if (ask == questions[i].answer[0] || ask == questions[i].answer[1]) {
+        console.log('The user is correct. ' + questions[i].correct);
+        score++;
+        alert(questions[i].correct);
+      } else {
+        console.log('The user is wrong. ' + questions[i].incorrect);
+        alert(questions[i].incorrect);
+      }
+      document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
     }
-    document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
+  }
+  //askQuestions();
+  document.querySelector('.begin').addEventListener('click', function(event){
+    if (counter <= questions.length) {
+      askQuestionsFancy();
+    }
+  });
+
+  function askQuestionsFancy() {
+    document.querySelector('.inner').innerHTML = questions[counter].question;
+    //for (var i = 0; i < questions.length; i++) {
+    //document.querySelector('.inner').innerHTML = questions[i].question;
+    document.querySelector('.answerChoices').setAttribute('style','display:block');
+    document.querySelector('.begin').setAttribute('style','display:none');
+    document.querySelector('.no').addEventListener('click', function(event){
+      if (counter < questions.length) {
+        if (questions[counter].answer[0] == 'no') {
+          score++;
+          counter++;
+          console.log('user score is ' + score);
+          console.log('counter is ' + counter);
+          console.log('question length is ' + questions.length);
+          document.querySelector('.inner').innerHTML = questions[counter].question;
+        } else {
+          counter++;
+          console.log('user score is ' + score);
+          console.log('counter is ' + counter);
+          console.log('question length is ' + questions.length);
+          document.querySelector('.inner').innerHTML = questions[counter].question;
+        }
+      } else {
+        document.querySelector('.inner').innerHTML = 'Thanks for playing!';
+        document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
+      }
+    });
+    document.querySelector('.yes').addEventListener('click', function(event){
+      //if (counter < questions.length) {
+        if (questions[counter].answer[0] == 'yes') {
+          score++;
+          counter++;
+          console.log('user score is ' + score);
+          console.log('counter is ' + counter);
+          console.log('question length is ' + questions.length);
+          if (counter < questions.length) {
+            document.querySelector('.inner').innerHTML = questions[counter].question;
+          } else {
+            document.querySelector('.inner').innerHTML = 'Thanks for playing!';
+            document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
+          }
+        } else {
+          counter++;
+          console.log('user score is ' + score);
+          console.log('counter is ' + counter);
+          console.log('question length is ' + questions.length);
+          if (counter < questions.length) {
+            document.querySelector('.inner').innerHTML = questions[counter].question;
+          } else {
+            document.querySelector('.inner').innerHTML = 'Thanks for playing!';
+            document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
+          }
+        }
+      //} else {
+        // document.querySelector('.inner').innerHTML = 'Thanks for playing!';
+        // document.querySelector('.results').innerHTML = 'Score is ' + score + ' out of ' + questions.length;
+      //}
+
+    });
+    //}
   }
 });
