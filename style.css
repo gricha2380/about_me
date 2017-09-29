@@ -1,1 +1,49 @@
+body, html {
+  height: 100%;
+}
+body {
+  font-family: 'Indie Flower', cursive;
+  background-color: #bbc7bb;
+  padding: 20px 20px 0;
+  font-size: 1.5em;
+}
 
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+.me {
+  margin: 0 auto -20px auto;
+  display: block;
+}
+
+.intro {
+  background-color: #4e265e;
+  color: rgba(255,255,255,.2);
+  font-size: 1.5em;
+  padding: 40px;
+  max-width: 700px;
+  margin: 50px auto 0;
+}
+
+.lower {
+  background-color: rgba(0,0,0,.2);
+  margin: 0 -40px -40px;
+  text-align: center;
+  padding: 10px;
+}
+
+.begin {
+  background: #71517e;
+  border: none;
+  padding: 6px 40px;
+  color: #ffffff;
+  font-family: 'Indie Flower';
+  font-size: .7em;
+}
+
+.result {
+  color: black;
+}
