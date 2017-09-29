@@ -67,13 +67,14 @@ button:hover {
 
 /* The animation code */
 @keyframes fadeUp {
-    from {margin-top: 0;opacity: 1}
+    from {margin-top: 0;opacity: 1;display: block;}
     to {margin-top: -10px;opacity: 0;display: none;}
 }
 
 .feedback.live {
     animation-name: fadeUp;
     animation-duration: 1s;
+    opacity: 1;
     display: block;
 }
 .feedback {
