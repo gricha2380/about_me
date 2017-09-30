@@ -5,13 +5,13 @@ document.addEventListener('DOMContentLoaded', function(){
   // ask for user name
   var userName = prompt('Hi, what\'s your name?');
   // if user provides a name, use it
-  if (userName != null) {
-    document.querySelector('.userName').innerHTML = 'Hi ' + userName + '. ';
-    console.log(userName);
+  if (userName == null || userName.length == 0) {
+    document.querySelector('.userName').innerHTML = 'Hi annonmyous Stranger! ';
   }
   // otherwise be snarky
   else {
-    document.querySelector('.userName').innerHTML = 'Hi annonmyous Stranger! ';
+    document.querySelector('.userName').innerHTML = 'Hi ' + userName + '. ';
+    console.log(userName);
   }
   // saving object of correct answers. Used in button event listners to compare user input
   var choices = {'yes':['yes','y'],'no':['no','n']};
