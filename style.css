@@ -13,6 +13,8 @@ body {
 }
 
 .title {
+  font-family: 'Montserrat', sans-serif;
+  color: #3e3e3e;
   text-align: center;
   font-weight: bold;
   font-size: 2em;
@@ -89,12 +91,12 @@ button:hover {
 
 .caption {
   text-align: center;
-  padding: 5px 20px;
+  padding: 5px 100px;
   margin: 20px auto;
   background: rgba(0, 0, 0, 0.6);
   color: white;
   position: relative;
-  width: 500px;
+  width: 580px;
 }
 
 .caption:empty {
